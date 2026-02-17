@@ -4,13 +4,13 @@
 ![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-Latest-orange.svg)
 
-## 📌 Project Overview
+## Project Overview
 
 **AI Justice Assistant** is a machine learning-powered web application designed to assist legal professionals in assessing recidivism risk (the likelihood of a criminal defendant re-offending).
 
 This project replicates and enhances the critical analysis of the **COMPAS** algorithm. It features a transparent, interpretable model that combines tabular defendant data with natural language processing (NLP) of charge descriptions to provide a holistic risk assessment.
 
-### 🚀 Key Features
+### Key Features
 - **Hybrid AI Model**: Combines Logistic Regression (Tabular data) and TF-IDF/Naive Bayes (Text data) via a Meta-Learner.
 - **Glass-Box Design**: Prioritizes interpretability to reduce "black box" dangers in judicial AI.
 - **Model Confidence Score**: Displays the model's prediction probability to provide transparency on certainty.
@@ -20,7 +20,7 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Backend**: Python, Flask
 - **Machine Learning**: scikit-learn, joblib, pandas, numpy
@@ -29,7 +29,7 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 1. **Clone the Repository**
    ```bash
@@ -58,7 +58,7 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 ├── app.py                 # Main Flask Application
@@ -74,7 +74,7 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 ---
 
-## ⚖️ Disclaimer
+## Disclaimer
 
 This tool is a **prototype for educational and research purposes**. It is designed to demonstrate technical proficiency in Applied AI and ethical software design. It is **not** intended for real-world judicial decision-making without further rigorous validation and legal compliance checks.
 
