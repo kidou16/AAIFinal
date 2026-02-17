@@ -1,37 +1,83 @@
-# Applied Artificial Intelligence 2025/2026
-## Final Exam: COMPAS Case Study
+# AI Justice Assistant | Recidivism Risk Assessment
 
-**Lecturer**: Prof. Niklas Kühl<br>
-**Supervisors**: Luca Deck, Victor Kolominsky-Rabas<br>
-**Submission Due Date**: Sunday, February 8th 2026
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-Latest-orange.svg)
+
+## 📌 Project Overview
+
+**AI Justice Assistant** is a machine learning-powered web application designed to assist legal professionals in assessing recidivism risk (the likelihood of a criminal defendant re-offending).
+
+This project replicates and enhances the critical analysis of the **COMPAS** algorithm. It features a transparent, interpretable model that combines tabular defendant data with natural language processing (NLP) of charge descriptions to provide a holistic risk assessment.
+
+### 🚀 Key Features
+- **Hybrid AI Model**: Combines Logistic Regression (Tabular data) and TF-IDF/Naive Bayes (Text data) via a Meta-Learner.
+- **Glass-Box Design**: Prioritizes interpretability to reduce "black box" dangers in judicial AI.
+- **Model Confidence Score**: Displays the model's prediction probability to provide transparency on certainty.
+- **Bias Warning System**: Automatically flags potential algorithmic bias for demographic groups with historically high error rates.
+- **Modern UI/UX**: Features a responsive, glassmorphism interface for a seamless user experience.
+- **Ethical AI Focus**: Built with fairness constraints and bias awareness as core principles.
 
 ---
-### Submission
 
-- Please submit your code in GitLab.
-- Update the ``requirements.txt`` if you use additional packages.
-- Export and upload all final model versions **used for the deployment task** that you trained yourself and took more than a minute to train.
-- Describe all plots and explain your reasoning for all performance evaluations.
-- Make sure to document your approach, to make it easier to understand the code. However, if you write extensive paragraphs of comments, we will delete / shorten them for the oral exam!
+## 🛠️ Technology Stack
 
-### Setup
+- **Backend**: Python, Flask
+- **Machine Learning**: scikit-learn, joblib, pandas, numpy
+- **Frontend**: HTML5, CSS3 (Glassmorphism design), Google Fonts
+- **Data**: COMPAS Recidivism Racial Bias Dataset
 
-**Create a virtual environment in VS Code**:
-- Open VS Code and navigate to your project directory.
-- Press `Ctrl+Shift+P` to open the command palette.
-- Type `Python: Select Interpreter`
-- Select `Create Virtual Environment`
-- Select `Venv`
-- Select a Python Interpretation (version ~ 3.11.x)
-- Select `requirements.txt` to install necessary packages. 
-<br>
-You are allowed to install and use other packages, if you want to. Make sure you are able to explain all code that you include in your solution.
+---
 
-### General Background:
+## ⚙️ Installation & Setup
 
-![Logo](figures/Northpointe.png)
-<br>
-The COMPAS software, developed by Northpointe, is a commercial risk assessment tool used by courts and correctional facilities to estimate a criminal defendant's likelihood of re-offending (*recidivism*). Judges and parole officers often consult these scores when making decisions about bail, sentencing, and probation.
-Because these scores can decide the fates of US citizens, COMPAS is a popular example for high-risk AI systems and has been thoroughly scrutinized by investigative journalists from ProPublica. You can find more information on this case by looking into their [article](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing), their [published analysis](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm), and their [code](https://github.com/propublica/compas-analysis).
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/kidou16/AAIFinal.git
+   cd AAIFinal
+   ```
 
-Your task is to replicate the critical analysis from the investigative journalists by leveraging methodology from the Applied AI course. Based on the insights from this critical analysis, you design a human-AI interaction that limits ethical and societal risks.
+2. **Create a Virtual Environment**
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run the Application**
+   ```bash
+   python app.py
+   ```
+
+5. **Access the App**
+   Open your browser and navigate to: `http://127.0.0.1:5000`
+
+---
+
+## 📂 Project Structure
+
+```
+├── app.py                 # Main Flask Application
+├── utils.py               # Model Logic & Utility Functions
+├── models/                # Pre-trained ML Models
+├── templates/             # HTML Frontend Templates
+│   ├── index.html         # Input Form
+│   └── result.html        # Prediction Result with Gauges
+├── data/                  # Datasets used for training
+├── requirements.txt       # Project Dependencies
+└── notebooks/             # Original Analysis & Training Notebooks (.ipynb)
+```
+
+---
+
+## ⚖️ Disclaimer
+
+This tool is a **prototype for educational and research purposes**. It is designed to demonstrate technical proficiency in Applied AI and ethical software design. It is **not** intended for real-world judicial decision-making without further rigorous validation and legal compliance checks.
+
+---
+
+**Author**: Yugal Jagtap

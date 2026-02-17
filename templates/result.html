@@ -4,85 +4,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assessment Result</title>
+    <title>Risk Assessment Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --low: #22c55e;
+            --medium: #eab308;
+            --high: #ef4444;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 2rem;
             text-align: center;
         }
 
-        .result-box {
-            border: 2px solid #333;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            background-color: #f9f9f9;
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .score {
-            font-size: 3em;
-            font-weight: bold;
-            color: #d9534f;
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #94a3b8;
         }
 
-        .low-risk {
-            color: #5cb85c;
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 5rem;
+            font-weight: 800;
+            border: 8px solid;
+            position: relative;
         }
 
-        .medium-risk {
-            color: #f0ad4e;
+        .score-circle.low-risk {
+            border-color: var(--low);
+            color: var(--low);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
         }
 
-        .high-risk {
-            color: #d9534f;
+        .score-circle.medium-risk {
+            border-color: var(--medium);
+            color: var(--medium);
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.2);
         }
 
-        .disclaimer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #555;
-            background-color: #eef;
-            padding: 15px;
-            border-left: 5px solid #007bff;
+        .score-circle.high-risk {
+            border-color: var(--high);
+            color: var(--high);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
+        }
+
+        .risk-label {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .low-risk .risk-label {
+            color: var(--low);
+        }
+
+        .medium-risk .risk-label {
+            color: var(--medium);
+        }
+
+        .high-risk .risk-label {
+            color: var(--high);
+        }
+
+        .confidence {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .confidence span {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .explanation {
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .bias-alert {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             text-align: left;
         }
 
-        .back-link {
+        .bias-icon {
+            font-size: 1.5rem;
+        }
+
+        .btn {
             display: inline-block;
-            margin-top: 20px;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
             text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
+            border-radius: 12px;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 
 <body>
-    <h1>Risk Assessment Result</h1>
+    <div class="container">
+        <div class="card {{ risk_class }}">
+            <h1>Assessment Complete</h1>
 
-    <div class="result-box">
-        <p>The estimated Risk Decile Score is:</p>
-        <div class="score {{ risk_class }}">
-            {{ score }} / 10
+            <div class="score-circle {{ risk_class }}">
+                {{ score }}
+            </div>
+
+            <div class="risk-label">
+                {{ risk_level }} Risk
+            </div>
+
+            <div class="confidence">
+                Model Confidence: <span>{{ confidence }}%</span>
+            </div>
+
+            <p class="explanation">
+                This score is based on the provided criminal history, age, and nature of the current charge.
+                Scores 1-4 are Low, 5-7 are Medium, and 8-10 are High Risk.
+            </p>
+
+            {% if bias_message %}
+            <div class="bias-alert">
+                <span class="bias-icon">⚠️</span>
+                <span>{{ bias_message }}</span>
+            </div>
+            {% endif %}
+
+            <a href="/" class="btn">New Assessment</a>
         </div>
-        <p><strong>Risk Level:</strong> {{ risk_level }}</p>
     </div>
-
-    <div class="disclaimer">
-        <h3>Important Human-AI Interaction Notice</h3>
-        <p><strong>Bias Warning:</strong> This model estimates risk based on historical data which contains systemic
-            biases. It has been shown to have higher False Positive Rates for African-American defendants (predicting
-            high risk for those who do not re-offend).</p>
-        <p><strong>Model Limitations:</strong> This score is a statistical estimate, not a guarantee of future behavior.
-            Do not use this score as the sole basis for detention or sentencing decisions.</p>
-        <p><strong>Judge's Role:</strong> Use your independent judgment. Consider individualized factors not captured in
-            this tabular data.</p>
-    </div>
-
-    <a href="/" class="back-link">← Assess Another Case</a>
 </body>
 
 </html>

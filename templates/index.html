@@ -4,138 +4,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recidivism Risk Assessment</title>
+    <title>AI Risk Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #ec4899;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(148, 163, 184, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: sans-serif;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
+        }
+
+        .container {
+            width: 100%;
             max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 2rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
         h1 {
-            text-align: center;
-            color: #333;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
         }
 
-        input[type="text"],
-        input[type="number"],
+        input,
         select {
             width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
         }
 
         .hint {
-            font-size: 0.8em;
-            color: #666;
+            display: block;
+            margin-top: 0.4rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        button {
+            width: 100%;
+            padding: 1.2rem;
+            margin-top: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Custom Scrollbar for Select */
+        select option {
+            background-color: var(--bg);
+            color: var(--text);
         }
     </style>
 </head>
 
 <body>
-    <h1>Recidivism Risk Assessment Tool</h1>
-    <p>Please enter the defendant's details below to estimate the risk score.</p>
+    <div class="container">
+        <div class="card">
+            <header>
+                <h1>Recidivism Risk Assessment</h1>
+            </header>
 
-    <form action="/predict" method="POST">
-        <div class="form-group">
-            <label for="age">Age</label>
-            <input type="number" id="age" name="age" required min="18" max="100">
+            <form action="/predict" method="POST">
+                <div class="form-grid">
+                    <!-- Personal Details -->
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" required min="18" max="100" placeholder="18-100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select id="sex" name="sex" required>
+                            <option value="" disabled selected>Select Sex</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="race">Race</label>
+                        <select id="race" name="race" required>
+                            <option value="" disabled selected>Select Race</option>
+                            <option value="African-American">African-American</option>
+                            <option value="Caucasian">Caucasian</option>
+                            <option value="Hispanic">Hispanic</option>
+                            <option value="Asian">Asian</option>
+                            <option value="Native American">Native American</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Criminal History -->
+                    <div class="form-group">
+                        <label for="priors_count">Prior Convictions</label>
+                        <input type="number" id="priors_count" name="priors_count" required min="0" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="juv_fel_count">Juvenile Felonies</label>
+                        <input type="number" id="juv_fel_count" name="juv_fel_count" required min="0" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="juv_misd_count">Juvenile Misdemeanors</label>
+                        <input type="number" id="juv_misd_count" name="juv_misd_count" required min="0" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="juv_other_count">Other Juvenile Offenses</label>
+                        <input type="number" id="juv_other_count" name="juv_other_count" required min="0" value="0">
+                    </div>
+
+                    <!-- Current Charge -->
+                    <div class="form-group">
+                        <label for="c_charge_degree">Charge Degree</label>
+                        <select id="c_charge_degree" name="c_charge_degree" required>
+                            <option value="F">Felony (F)</option>
+                            <option value="M">Misdemeanor (M)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label for="c_charge_desc">Charge Description</label>
+                    <input type="text" id="c_charge_desc" name="c_charge_desc"
+                        placeholder="e.g. Battery, Possession, Grand Theft..." required>
+                </div>
+
+                <!-- Optional Fields toggled/hidden or clean layout -->
+                <div class="form-grid" style="margin-top: 1.5rem;">
+                    <div class="form-group">
+                        <label for="days_b_screening_arrest">Days Screening to Arrest</label>
+                        <input type="number" id="days_b_screening_arrest" name="days_b_screening_arrest" value="0">
+                        <span class="hint">Optional (Default: 0)</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="c_days_from_compas">Days from Assessment</label>
+                        <input type="number" id="c_days_from_compas" name="c_days_from_compas" value="0">
+                        <span class="hint">Optional (Default: 0)</span>
+                    </div>
+                </div>
+
+                <button type="submit">Analyze Risk Profile</button>
+            </form>
         </div>
-
-        <div class="form-group">
-            <label for="sex">Sex</label>
-            <select id="sex" name="sex" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="race">Race</label>
-            <select id="race" name="race" required>
-                <option value="African-American">African-American</option>
-                <option value="Caucasian">Caucasian</option>
-                <option value="Hispanic">Hispanic</option>
-                <option value="Other">Other</option>
-                <option value="Asian">Asian</option>
-                <option value="Native American">Native American</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="priors_count">Number of Prior Convictions</label>
-            <input type="number" id="priors_count" name="priors_count" required min="0" value="0">
-        </div>
-
-        <div class="form-group">
-            <label for="juv_fel_count">Juvenile Felonies Count</label>
-            <input type="number" id="juv_fel_count" name="juv_fel_count" required min="0" value="0">
-        </div>
-
-        <div class="form-group">
-            <label for="juv_misd_count">Juvenile Misdemeanors Count</label>
-            <input type="number" id="juv_misd_count" name="juv_misd_count" required min="0" value="0">
-        </div>
-
-        <div class="form-group">
-            <label for="juv_other_count">Juvenile Other Count</label>
-            <input type="number" id="juv_other_count" name="juv_other_count" required min="0" value="0">
-        </div>
-
-        <div class="form-group">
-            <label for="c_charge_degree">Current Charge Degree</label>
-            <select id="c_charge_degree" name="c_charge_degree" required>
-                <option value="F">Felony (F)</option>
-                <option value="M">Misdemeanor (M)</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="c_charge_desc">Current Charge Description</label>
-            <input type="text" id="c_charge_desc" name="c_charge_desc"
-                placeholder="e.g. Battery, Possession, Grand Theft..." required>
-        </div>
-
-        <div class="form-group">
-            <label for="days_b_screening_arrest">Days Between Screening & Arrest (Optional)</label>
-            <input type="number" id="days_b_screening_arrest" name="days_b_screening_arrest" value="0">
-            <span class="hint">Default is 0 if unknown.</span>
-        </div>
-
-        <div class="form-group">
-            <label for="c_days_from_compas">Days From COMPAS Assessment (Optional)</label>
-            <input type="number" id="c_days_from_compas" name="c_days_from_compas" value="0">
-            <span class="hint">Default is 0 if unknown.</span>
-        </div>
-
-        <button type="submit">Assess Risk</button>
-    </form>
+    </div>
 </body>
 
 </html>
