@@ -7,3 +7,4 @@ seaborn
 flask
 fairlearn
 shap
+lime

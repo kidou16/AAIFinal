@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Result</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .result-box {
+            border: 2px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        .low-risk {
+            color: #5cb85c;
+        }
+
+        .medium-risk {
+            color: #f0ad4e;
+        }
+
+        .high-risk {
+            color: #d9534f;
+        }
+
+        .disclaimer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #555;
+            background-color: #eef;
+            padding: 15px;
+            border-left: 5px solid #007bff;
+            text-align: left;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Risk Assessment Result</h1>
+
+    <div class="result-box">
+        <p>The estimated Risk Decile Score is:</p>
+        <div class="score {{ risk_class }}">
+            {{ score }} / 10
+        </div>
+        <p><strong>Risk Level:</strong> {{ risk_level }}</p>
+    </div>
+
+    <div class="disclaimer">
+        <h3>Important Human-AI Interaction Notice</h3>
+        <p><strong>Bias Warning:</strong> This model estimates risk based on historical data which contains systemic
+            biases. It has been shown to have higher False Positive Rates for African-American defendants (predicting
+            high risk for those who do not re-offend).</p>
+        <p><strong>Model Limitations:</strong> This score is a statistical estimate, not a guarantee of future behavior.
+            Do not use this score as the sole basis for detention or sentencing decisions.</p>
+        <p><strong>Judge's Role:</strong> Use your independent judgment. Consider individualized factors not captured in
+            this tabular data.</p>
+    </div>
+
+    <a href="/" class="back-link">← Assess Another Case</a>
+</body>
+
+</html>
