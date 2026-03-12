@@ -29,6 +29,11 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 ---
 
+## Video Preview
+https://github.com/user-attachments/assets/f7181898-e1ef-4875-86cb-11f732056ffd
+
+---
+
 ## Installation & Setup
 
 1. **Clone the Repository**
@@ -55,11 +60,6 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 5. **Access the App**
    Open your browser and navigate to: `http://127.0.0.1:5000`
-
----
-
-## Video Preview
-https://github.com/user-attachments/assets/f7181898-e1ef-4875-86cb-11f732056ffd
 
 ---
 
