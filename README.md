@@ -24,7 +24,7 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 - **Backend**: Python, Flask
 - **Machine Learning**: scikit-learn, joblib, pandas, numpy
-- **Frontend**: HTML5, CSS3 (Glassmorphism design), Google Fonts
+- **Frontend**: HTML5, CSS3, Google Fonts
 - **Data**: COMPAS Recidivism Racial Bias Dataset
 
 ---
@@ -55,6 +55,11 @@ This project replicates and enhances the critical analysis of the **COMPAS** alg
 
 5. **Access the App**
    Open your browser and navigate to: `http://127.0.0.1:5000`
+
+---
+
+## Video Preview
+https://github.com/user-attachments/assets/f7181898-e1ef-4875-86cb-11f732056ffd
 
 ---
 
